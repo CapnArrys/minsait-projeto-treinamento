@@ -4,10 +4,11 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,21 +18,26 @@ public class Contact {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable = false)
-	private int contactType;
+	private ContactType contactType;
 	
 	@Column(nullable = false)
 	private String contact;
 	
+	@Column
+	private Long person;
+	
 	public Contact() {}
 	
-	public Contact(Long Id, int contactType, String contact) {
+	public Contact(Long Id, ContactType contactType, String contact, Long person) {
 		this.id = Id;
 		this.contactType = contactType;
 		this.contact = contact;
-		
-		
+		this.person = person;
 	}
+
+
 
 
 	public Long getId() {
@@ -44,12 +50,12 @@ public class Contact {
 	}
 
 
-	public int getContactType() {
+	public ContactType getContactType() {
 		return contactType;
 	}
 
 
-	public void setContactType(int contactType) {
+	public void setContactType(ContactType contactType) {
 		this.contactType = contactType;
 	}
 
@@ -61,6 +67,14 @@ public class Contact {
 
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+	
+	public Long getPerson() {
+		return person;
+	}
+
+	public void setPerson(Long person) {
+		this.person = person;
 	}
 
 	@Override

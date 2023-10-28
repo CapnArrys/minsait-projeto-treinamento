@@ -36,7 +36,7 @@ public class Person {
 	@Column(nullable = true)
 	private String federalUnit;
 	
-	@OneToMany(mappedBy="Person")
+	@OneToMany(mappedBy="person")
 	private List<Contact> contacts;
 	
 	public Person() {
