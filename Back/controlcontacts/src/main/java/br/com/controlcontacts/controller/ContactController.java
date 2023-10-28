@@ -56,9 +56,9 @@ public class ContactController {
 	}
 	 @Operation(
 		      summary = "Atualizando o contato")
-	@PutMapping
-	public ResponseEntity<Contact> update(@RequestBody Contact contact){
-		return new ResponseEntity<>(contactService.update(contact), HttpStatus.CREATED);
+	@PutMapping("/{id}")
+	public ResponseEntity<Contact> update(@PathVariable Long id, @RequestBody Contact contact){
+		return new ResponseEntity<>(contactService.update(id,contact), HttpStatus.CREATED);
 	}
 	
 	 @Operation(

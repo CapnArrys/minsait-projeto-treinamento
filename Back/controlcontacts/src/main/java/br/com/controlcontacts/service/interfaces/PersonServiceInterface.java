@@ -11,7 +11,7 @@ public interface PersonServiceInterface {
 	Person save(Person person);
 	Optional<Person> getById(Long id);
 	List<Person> getAll();
-	Person update(Person person);
+	Person update(Long id, Person person);
 	void delete(Long id);
 	Optional<PersonDTO> getDTOById(Long id);
 

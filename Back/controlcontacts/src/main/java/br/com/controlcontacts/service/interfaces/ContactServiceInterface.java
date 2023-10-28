@@ -11,7 +11,7 @@ public interface ContactServiceInterface {
 	Contact save(Contact contact);
 	Optional<Contact> getById(Long id);
 	List<Contact> getAll();
-	Contact update(Contact contact);
+	Contact update(Long id, Contact contact);
 	void delete(Long id);
 
 	

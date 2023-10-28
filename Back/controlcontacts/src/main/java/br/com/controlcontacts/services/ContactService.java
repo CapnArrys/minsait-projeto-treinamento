@@ -38,9 +38,9 @@ import br.com.controlcontacts.service.interfaces.ContactServiceInterface;
 		}
 
 		@Override
-		public Contact update(Contact contact) {
+		public Contact update(Long id, Contact contact) {
 			//encontrei o produto
-			Optional<Contact> upContact = contactRepository.findById(contact.getId());
+			Optional<Contact> upContact = contactRepository.findById(id);
 			
 			//se ele existir, atualizar:
 			if(upContact.isPresent()) {

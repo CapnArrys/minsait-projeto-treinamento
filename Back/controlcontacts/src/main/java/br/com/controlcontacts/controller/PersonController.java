@@ -68,9 +68,9 @@ public class PersonController {
 	}
 	 @Operation(
 		      summary = "Atualizando a pessoa")
-	@PutMapping
-	public ResponseEntity<Person> update(@RequestBody Person person){
-		return new ResponseEntity<>(personService.update(person), HttpStatus.CREATED);
+	@PutMapping("/{id}")
+	public ResponseEntity<Person> update(@PathVariable Long id, @RequestBody Person person){
+		return new ResponseEntity<>(personService.update(id, person), HttpStatus.CREATED);
 	}
 	 
 	 @Operation(

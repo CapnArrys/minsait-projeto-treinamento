@@ -47,8 +47,8 @@ public class PersonService implements PersonServiceInterface {
 	}
 
 	@Override
-	public Person update(Person person) {
-		Optional<Person> upPerson = personRepository.findById(person.getId());
+	public Person update(Long id, Person person) {
+		Optional<Person> upPerson = personRepository.findById(id);
 		
 		if(upPerson.isPresent()) {
 			Person newPerson = upPerson.get();
