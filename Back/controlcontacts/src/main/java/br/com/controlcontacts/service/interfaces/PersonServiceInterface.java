@@ -3,6 +3,7 @@ package br.com.controlcontacts.service.interfaces;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.controlcontacts.dto.PersonDTO;
 import br.com.controlcontacts.entities.Person;
 
 public interface PersonServiceInterface {
@@ -12,6 +13,7 @@ public interface PersonServiceInterface {
 	List<Person> getAll();
 	Person update(Person person);
 	void delete(Long id);
+	Optional<PersonDTO> getDTOById(Long id);
 
 
 }

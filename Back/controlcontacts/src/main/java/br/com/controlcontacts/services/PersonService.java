@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.controlcontacts.exception.ResourceNotFoundException;
+import br.com.controlcontacts.dto.PersonDTO;
 import br.com.controlcontacts.entities.Person;
 import br.com.controlcontacts.repository.PersonRepository;
 import br.com.controlcontacts.service.interfaces.PersonServiceInterface;
@@ -29,7 +30,15 @@ public class PersonService implements PersonServiceInterface {
 
 	@Override
 	public Optional<Person> getById(Long id) {
-		return personRepository.findById(id);
+		return personRepository.findById(id);	
+	}
+	
+	public 	Optional<PersonDTO> getDTOById(Long id) {
+		Person person = personRepository.findById(id).get();
+		PersonDTO dto = new PersonDTO(person.getId(), person.getName(),
+				person.getAddress() + person.getPostalCode() + person.getCity() + person.getFederalUnit());
+		return Optional.ofNullable(dto);
+		
 	}
 
 	@Override

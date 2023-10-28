@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.controlcontacts.dto.PersonDTO;
 import br.com.controlcontacts.entities.Person;
 import br.com.controlcontacts.services.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,6 +49,17 @@ public class PersonController {
 			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(person);
 	}
+	
+	@Operation(
+		      summary = "retornando de pessoa por Id para mala direta")
+	@GetMapping("/maladireta/{id}")
+	public ResponseEntity<Optional<PersonDTO>> getDTOById(@PathVariable Long id){
+		Optional<PersonDTO> person = personService.getDTOById(id);
+		if(person == null)
+			return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(person);
+	}
+	
 	 @Operation(
 		      summary = "salvando uma pessoa")
 	@PostMapping
