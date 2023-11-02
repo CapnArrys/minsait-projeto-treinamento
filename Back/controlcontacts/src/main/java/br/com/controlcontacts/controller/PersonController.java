@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlcontacts.dto.PersonDTO;
+import br.com.controlcontacts.entities.Contact;
 import br.com.controlcontacts.entities.Person;
+import br.com.controlcontacts.services.ContactService;
 import br.com.controlcontacts.services.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -25,9 +27,11 @@ import io.swagger.v3.oas.annotations.Operation;
 public class PersonController {
 	
 	private PersonService personService;
+	private ContactService contactService;
 	
 	@Autowired
-	public PersonController(PersonService personService) {
+	public PersonController(PersonService personService, ContactService contactService) {
+		this.contactService = contactService;
 		this.personService = personService;
 	}
 	@Operation(
@@ -49,6 +53,15 @@ public class PersonController {
 			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(person);
 	}
+	@Operation(
+		      summary = "retornando uma lista de todos os contatos de uma pessoa")
+	@GetMapping("/{idPessoa}/contatos")
+	public ResponseEntity<List<Contact>> getContactsByPerson(@PathVariable Long idPessoa){
+		List<Contact> contacts = contactService.getAllByPerson(idPessoa);
+		if(contacts == null)
+			return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(contacts);
+	}
 	
 	@Operation(
 		      summary = "retornando de pessoa por Id para mala direta")
@@ -63,8 +76,14 @@ public class PersonController {
 	 @Operation(
 		      summary = "salvando uma pessoa")
 	@PostMapping
-	public ResponseEntity<Person> save(@RequestBody Person person){
+	public ResponseEntity<Person> savePerson(@RequestBody Person person){
 		return new ResponseEntity<>(personService.save(person), HttpStatus.CREATED);
+	}
+	 @Operation(
+		      summary = "Salvando o contato")
+	@PostMapping("/{id}/contatos")
+	public ResponseEntity<Contact> saveContact(@PathVariable Long id, @RequestBody Contact contact){
+		return new ResponseEntity<>(contactService.save(id, contact), HttpStatus.CREATED);
 	}
 	 @Operation(
 		      summary = "Atualizando a pessoa")

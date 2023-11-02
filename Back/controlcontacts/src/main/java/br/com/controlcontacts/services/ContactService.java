@@ -23,7 +23,8 @@ import br.com.controlcontacts.service.interfaces.ContactServiceInterface;
 		}
 		
 		@Override
-		public Contact save(Contact contact) {
+		public Contact save(Long idPerson, Contact contact) {
+			contact.setPerson(idPerson);
 			return contactRepository.save(contact);
 		}
 
@@ -36,6 +37,13 @@ import br.com.controlcontacts.service.interfaces.ContactServiceInterface;
 		public List<Contact> getAll() {
 			return contactRepository.findAll();
 		}
+		
+		@Override
+		public List<Contact> getAllByPerson(Long idPerson) {
+			return contactRepository.findAllByPerson(idPerson);
+		}
+		
+		
 
 		@Override
 		public Contact update(Long id, Contact contact) {

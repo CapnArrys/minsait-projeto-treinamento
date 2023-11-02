@@ -48,12 +48,7 @@ public class ContactController {
 			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(contact);
 	}
-	 @Operation(
-		      summary = "Salvando o contato")
-	@PostMapping
-	public ResponseEntity<Contact> save(@RequestBody Contact contact){
-		return new ResponseEntity<>(contactService.save(contact), HttpStatus.CREATED);
-	}
+	
 	 @Operation(
 		      summary = "Atualizando o contato")
 	@PutMapping("/{id}")

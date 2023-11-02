@@ -8,9 +8,10 @@ import br.com.controlcontacts.entities.Contact;
 
 public interface ContactServiceInterface {
 	
-	Contact save(Contact contact);
+	Contact save(Long idPerson, Contact contact);
 	Optional<Contact> getById(Long id);
 	List<Contact> getAll();
+	List<Contact> getAllByPerson(Long idPerson);
 	Contact update(Long id, Contact contact);
 	void delete(Long id);
 
