@@ -14,7 +14,7 @@ export class ProdutosService {
     return this.http.get<IProduto[]>(this.api);
   }
 
-  buscarPorId(id: number) {
+  buscarPorId(id: string) {
     return this.http.get<IProduto>(this.api + '/' + id);
   }
 
@@ -26,7 +26,7 @@ export class ProdutosService {
     return this.http.put<IProduto>(this.api, produto);
   }
 
-  deletarProduto(id: number) {
+  removerProduto(id: number) {
     return this.http.delete(this.api + '/' + id);
   }
 }
